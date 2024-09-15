@@ -11,7 +11,6 @@ from datetime import date
 
 """
 
-
 class StartingPageView(ListView):
     template_name = "blog/index.html"
     model = Post
@@ -22,6 +21,7 @@ class StartingPageView(ListView):
         queryset = super().get_queryset()
         data = queryset[:2]
         return data
+        
 """
 
 
@@ -140,7 +140,6 @@ def post_detail(request, slug):
     return render(request, "personal_blogs/post-detail.html", {
         "post": current_post
     })
-    # pass
 
 
 """
