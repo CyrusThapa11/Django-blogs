@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> {% block title %}A fallback title{% endblock title %} </title>
+
+    {% block css_files %}{% endblock css_files %}
+</head>
+<body>
+
+    <h2>This is a tempalte </h2>
+    {% comment %} <h3>{{ django |  name }}</h3> {% endcomment %}
+
+    {% block content %}{% endblock content %}
+
+    {% comment %} {% for i in range(5)  %}
+    <h2>letsgo {{ i }} </h2>
+    {% endfor %} {% endcomment %}
+
+
+</body>
+</html>

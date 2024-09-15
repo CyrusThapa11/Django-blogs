@@ -25,7 +25,9 @@ class StartingPageView(ListView):
 
 
 def index(request):
-    return HttpResponse("here")
+
+    return render(request, 'personal_blogs/index.html')
+    # return HttpResponse("here")
     # latest_posts = Post.objects.all().order_by("-date")[:2]
     # return render(request, "blog/index.html", {
     #     "posts": latest_posts
