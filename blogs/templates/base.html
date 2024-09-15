@@ -1,23 +1,24 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> {% block title %}A fallback title{% endblock title %} </title>
-
-    {% block css_files %}{% endblock css_files %}
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}{% endblock %}</title>
+  <link rel="stylesheet" href="{% static "app.css" %}"  />
+  {% block css_files %}{% endblock %}
 </head>
 <body>
+  <header id="main-navigation">
+  {% comment %} <h1><a href="{% url 'starting-page' %}">Maryam' Blog</a></h1> {% endcomment %}
+  <nav>
+    {% comment %} <a href=" {% url 'read-later' %} ">Stored Posts</a> {% endcomment %}
+    {% comment %} <a href=" {% url 'posts' %} ">All Posts</a> {% endcomment %}
 
-    <h2>This is a tempalte </h2>
-    {% comment %} <h3>{{ django |  name }}</h3> {% endcomment %}
-
-    {% block content %}{% endblock content %}
-
-    {% comment %} {% for i in range(5)  %}
-    <h2>letsgo {{ i }} </h2>
-    {% endfor %} {% endcomment %}
-
-
+  </nav>
+</header>
+  {% block content %}
+  {% endblock %}
 </body>
 </html>

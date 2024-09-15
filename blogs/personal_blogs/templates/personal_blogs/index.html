@@ -1,22 +1,42 @@
-{% extends "base.html" %}
+{% extends "base.html" %} 
+{% load static %}
 
+{% block title %} 
+Landmarks Blog 
+{% endblock %} 
 
-{% block title %}
-My personal blog !
-{% endblock title %}
-
+{% block css_files %}
+ <link rel="stylesheet" href="{% static "personal_blogs/post.css" %}" />
+ <link rel="stylesheet" href="{% static "personal_blogs/index.css" %}" />
+{% endblock %} 
 
 {% block content %}
+<section id="welcome">
+  <header>
+    <img src="{% static "personal_blogs/images/max.png" %}" alt="thapa-ji-the-author" />
+    <h2>Thapa BLOGssSS</h2>
+  </header>
+  <p>Hi, I am Maryam and I love to blog about landmarks around the world!</p>
+</section>
 
-    <header>
-        <h1>
-            <a href=""> Thapa's blogs  </a>
-        </h1>
-        <a href=""> All blogs  </a>
-    </header>
-    
+<section id="latest-posts">
+  <h2>My Latest Landmarks</h2>
 
-    <h2>
+  <ul>
+    {% for post  in posts %}
+      {% include "blog/includes/post.html" %}
+   {% endfor %}
+  </ul>
+</section>
 
- <h1> Welcome to my blog everyone !  </h1>
-{% endblock content %}
+<section id="about">
+  <h2>What I Do</h2>
+  <p>
+    I love travelling, I love to travel arouond the world and enjoy exploring new
+    sightseengs!
+  </p>
+  <p>
+    Meeting people from other cultures will teach you that the way you’ve been looking at the world isn’t the way everybody else does. In fact, your point-of-view might have some major blind spots. Seeing the world for yourself will improve your vision and your grip on reality.
+  </p>
+</section>
+{% endblock %}
