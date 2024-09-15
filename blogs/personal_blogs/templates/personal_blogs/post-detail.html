@@ -82,7 +82,7 @@
 {% endblock %} {% endcomment %}
 
 
-{% block content %}
+{% comment %} {% block content %}
 <section id="summary">
   <h2>Post Title</h2>
   <article> 
@@ -108,5 +108,21 @@
     aperiam est praesentium, quos iste consequuntur omnis exercitationem quam
     velit labore vero culpa ad mollitia? Quis architecto ipsam nemo. Odio.
   </p>
+</main>
+{% endblock %} {% endcomment %}
+
+
+{% block content %}
+<section id="summary">
+  <h2>{{ post.title }}</h2>
+  <article>
+    <img src="{% static "personal_blogs/images/"|add:post.image %}" alt="{{ post.title }}" />
+    <address>By {{ post.author }}</address>
+    <div>Last updated on <time>{{ post.date|date:"d M Y" }}</time></div>
+  </article>
+</section>
+
+<main>
+  {{ post.content|linebreaks }}
 </main>
 {% endblock %}

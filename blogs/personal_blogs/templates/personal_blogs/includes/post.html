@@ -1,9 +1,11 @@
 {% load static %}
 
 <li>
-    {% comment %} <article class="post">
-      <a href="{% url "post-detail-page" post.slug %}">
-        <img src="{{ post.image.url }}" alt="{{ post.title }}"
+    <article class="post">
+      <a href="{% url "post-detail" post.slug %}">
+        {% comment %} <img src="{{ post.image.url }}" alt="{{ post.title }}"
+        /> {% endcomment %}
+        <img src="{% static "personal_blogs/images/"|add:post.image %}" alt="{{ post.title }}"
         />
         <div class="post__content">
           <h3>{{ post.title }}</h3>
@@ -12,8 +14,9 @@
           </p>
         </div>
       </a>
-    </article> {% endcomment %}
-    <article class="post">
+    </article>
+
+    {% comment %} <article class="post">
       <a href="{% url "post-detail" "chopta-mountain" %}">
         <img src="{% static "personal_blogs/images/mountains.jpg" %}" alt="Mountain Hiking" />
         <div class="post__content"> 
@@ -25,5 +28,5 @@
           </p>
         </div>
       </a>
-    </article>
+    </article> {% endcomment %}
   </li>
