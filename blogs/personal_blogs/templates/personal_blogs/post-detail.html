@@ -6,12 +6,12 @@
 {% endblock %} 
 
 {% block css_files %} 
-{% comment %} <link rel="stylesheet" href="{% static "blog/post.css" %}" /> {% endcomment %}
-<link rel="stylesheet" href="{% static "blog/post-detail.css" %}" /> 
+  <link rel="stylesheet" href="{% static "personal_blogs/post.css" %}" />
+  <link rel="stylesheet" href="{% static "personal_blogs/post-detail.css" %}" /> 
 {% endblock %} 
 
 
-{% block content %}
+{% comment %} {% block content %}
 
 {% if comment_form.errors %}
   <div id="alert">
@@ -20,8 +20,6 @@
     <a href="#comment-form">Fix!</a>
   </div>
 {% endif %}
-
-
 
 <section id="summary">
   <h2>{{post.title}}</h2>
@@ -81,4 +79,34 @@
   </form>
 </section>
  
+{% endblock %} {% endcomment %}
+
+
+{% block content %}
+<section id="summary">
+  <h2>Post Title</h2>
+  <article> 
+    <img src="{% static "personal_blogs/images/mountains.jpg" %}" alt="Post Title" />
+    <address>By Maximilian</address>
+    <div>Last updated on <time>July 10th</time></div>
+  </article>
+</section>
+
+<main>
+  <p>
+    Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis nobis
+    aperiam est praesentium, quos iste consequuntur omnis exercitationem quam
+    velit labore vero culpa ad mollitia? Quis architecto ipsam nemo. Odio.
+  </p>
+  <p>
+    Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis nobis
+    aperiam est praesentium, quos iste consequuntur omnis exercitationem quam
+    velit labore vero culpa ad mollitia? Quis architecto ipsam nemo. Odio.
+  </p>
+  <p>
+    Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis nobis
+    aperiam est praesentium, quos iste consequuntur omnis exercitationem quam
+    velit labore vero culpa ad mollitia? Quis architecto ipsam nemo. Odio.
+  </p>
+</main>
 {% endblock %}

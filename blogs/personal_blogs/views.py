@@ -24,16 +24,6 @@ class StartingPageView(ListView):
 """
 
 
-def index(request):
-
-    return render(request, 'personal_blogs/index.html')
-    # return HttpResponse("here")
-    # latest_posts = Post.objects.all().order_by("-date")[:2]
-    # return render(request, "blog/index.html", {
-    #     "posts": latest_posts
-    # })
-
-
 """
 
 class AllPostView(ListView):
@@ -44,15 +34,26 @@ class AllPostView(ListView):
 """
 
 
+def index(request):
+
+    return render(request, 'personal_blogs/index.html')
+    # return HttpResponse("here")
+    # latest_posts = Post.objects.all().order_by("-date")[:2]
+    # return render(request, "blog/index.html", {
+    #     "posts": latest_posts
+    # })
+
+
 def posts(request):
-    pass
+    return render(request, "personal_blogs/all-posts.html")
 #   all_posts=Post.objects.all().order_by("-date")
 #   return render(request,"blog/all-posts.html",{
 #     "all_posts":all_posts
 #   })
 
 
-def post_detail(request):
+def post_detail(request, slug):
+    return render(request, "personal_blogs/post-detail.html")
     pass
 
 

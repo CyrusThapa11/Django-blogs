@@ -2,12 +2,12 @@
 {% load static %}
 
 {% block title %} 
-All Landmarks 
+  All Posts 
 {% endblock %} 
 
 {% block css_files %}
-   <link rel="stylesheet" href="{% static "blog/post.css" %}" />
-   <link rel="stylesheet" href="{% static "blog/all-posts.css" %}" />
+   <link rel="stylesheet" href="{% static "personal_blogs/post.css" %}" />
+   <link rel="stylesheet" href="{% static "personal_blogs/all-posts.css" %}" />
 {% endblock %}
 
 {% block content %}
@@ -15,9 +15,16 @@ All Landmarks
   <h2>My Collected Landmarks</h2>
 
   <ul>
-    {% for post in all_posts  %}
-      {% include "blog/includes/post.html" %}
-    {% endfor %}
+    {% comment %} {% for post in all_posts  %}
+      {% include "personal_blogs/includes/post.html" %}
+    {% endfor %} {% endcomment %}
+  
+    {% include "personal_blogs/includes/post.html" %}
+    {% include "personal_blogs/includes/post.html" %}
+    {% include "personal_blogs/includes/post.html" %}
+    {% include "personal_blogs/includes/post.html" %}
+    {% include "personal_blogs/includes/post.html" %}
+    {% include "personal_blogs/includes/post.html" %}
   </ul>
 </section>
 {% endblock %}
