@@ -1,3 +1,6 @@
 /blog
 /landmarks_blog
 /testing-1
+/blogs/book_outlet/__pycache__
+/blogs/book_outlet/migrations/__pycache__
+/blogs/db.sqlite3
