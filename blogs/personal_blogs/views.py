@@ -94,7 +94,8 @@ def posts(request):
 
 def post_detail(request, slug):
     identified_post = get_object_or_404(Post, slug=slug)
-    # NOTE : the tags propery is not an object of details it is simply an id to refer to from the database !
+    # NOTE : the tag
+    # s propery is not an object of details it is simply an id to refer to from the database !
     return render(request, "personal_blogs/post-detail.html", {
         "post": identified_post,
         "post_tags": identified_post.tags.all()

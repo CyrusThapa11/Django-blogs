@@ -33,6 +33,7 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     'book_outlet',
     'challenges',
+    'feedbacks',
     'personal_blogs',
     'django.contrib.admin',
     'django.contrib.auth',

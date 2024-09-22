@@ -4,3 +4,7 @@
 /blogs/book_outlet/__pycache__
 /blogs/book_outlet/migrations/__pycache__
 /blogs/db.sqlite3
+/blogs/personal_blogs/__pycache__
+/blogs/personal_blogs/db.sqlite3
+/blogs/feedbacks/migrations/__pycache__
+/blogs/feedbacks/__pycache__
