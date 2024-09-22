@@ -12,7 +12,7 @@ urlpatterns = [
     # path("read-later", views.ReadLaterView.as_view(), name="read-later")
 
 
-    path("", views.starting_posts, name="starting-page"),
+    path("", views.starting_page, name="starting-page"),
     path("posts", views.posts, name="posts"),
     path("posts/<slug:slug>", views.post_detail, name="post-detail")
 
