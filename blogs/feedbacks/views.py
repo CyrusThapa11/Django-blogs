@@ -1,9 +1,11 @@
+from typing import Any
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 
 from .forms import ReviewForm
 from .models import Review
 from django.views import View
+from django.views.generic.base import TemplateView
 
 # Create your views here.
 
@@ -55,8 +57,42 @@ class ReviewView(View):
         })
 
 
-def thank_you(request):
-    return render(request, "feedbacks/thank_you.html")
+class ThankYouView(TemplateView):
+
+    # this works for any get type requst !
+    template_name = "feedbacks/thank_you.html"
+
+    # def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
+    #     return super().get_context_data(**kwargs)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["message"] = "This works!"
+        return context
+
+
+class ReviewsListView(TemplateView):
+    template_name = "feedbacks/review_list.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        reviews = Review.objects.all()
+        context["reviews"] = reviews
+        return context
+
+
+class SingleReviewView(TemplateView):
+    template_name = "feedbacks/single_review.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        review_id = kwargs["id"]
+        selected_review = Review.objects.get(pk=review_id)
+        context["review"] = selected_review
+        return context
+
+# def thank_you(request):
+#     return render(request, "feedbacks/thank_you.html")
 
 
 """
