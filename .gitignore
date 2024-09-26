@@ -8,3 +8,5 @@
 /blogs/personal_blogs/db.sqlite3
 /blogs/feedbacks/migrations/__pycache__
 /blogs/feedbacks/__pycache__
+/blogs/profiles/__pycache__
+/blogs/profiles/migrations/__pycache__
