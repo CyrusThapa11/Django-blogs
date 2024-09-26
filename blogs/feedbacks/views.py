@@ -8,37 +8,32 @@ from .models import Review
 from django.views import View
 from django.views.generic.base import TemplateView
 from django.views.generic import ListView, DetailView
+from django.views.generic.edit import FormView, CreateView
 
 # Create your views here.
 
 
-# def review(request):
-#     return render(request, "feedbacks/review.html")
+class ReviewView(CreateView):
+    model = Review
+    form_class = ReviewForm
+    template_name = "feedbacks/review.html"
+    success_url = "/reviews/thank-you"
 
-# Create your views here.
 
-# def review(request):
-# if request.method == 'POST':
-#     entered_username = request.POST['username']
-#     print(entered_username)
-#     # return HttpResponseRedirect("reviews/thank-you")
-#     return HttpResponseRedirect("thank-you")
+"""
+class ReviewView(FormView):
+    form_class = ReviewForm
+    template_name = "feedbacks/review.html"
+    success_url = "/reviews/thank-you"
 
-# return render(request, "feedbacks/review.html")
-# if request.method == 'POST':
-#     entered_username = request.POST['username']
+    def form_valid(self, form):
+        form.save()
+        return super().form_valid(form)
 
-#     if entered_username == "" and len(entered_username) >= 100:
-#         return render(request, "reviews/review.html", {
-#             "has_error": True
-#         })
-#     print(entered_username)
-#     return HttpResponseRedirect("/thank-you")
 
-# return render(request, "feedbacks/review.html", {
-#     "has_error": False
-# })
+"""
 
+"""
 class ReviewView(View):
     def get(self, request):
         form = ReviewForm()
@@ -57,6 +52,7 @@ class ReviewView(View):
         return render(request, "feedbacks/review.html", {
             "form": form
         })
+"""
 
 
 class ThankYouView(TemplateView):
@@ -97,6 +93,37 @@ class ReviewsListView(ListView):
 class SingleReviewView(DetailView):
     template_name = "feedbacks/single_review.html"
     model = Review
+
+
+# Create your views here.
+
+
+# def review(request):
+#     return render(request, "feedbacks/review.html")
+
+# Create your views here.
+
+# def review(request):
+# if request.method == 'POST':
+#     entered_username = request.POST['username']
+#     print(entered_username)
+#     # return HttpResponseRedirect("reviews/thank-you")
+#     return HttpResponseRedirect("thank-you")
+
+# return render(request, "feedbacks/review.html")
+# if request.method == 'POST':
+#     entered_username = request.POST['username']
+
+#     if entered_username == "" and len(entered_username) >= 100:
+#         return render(request, "reviews/review.html", {
+#             "has_error": True
+#         })
+#     print(entered_username)
+#     return HttpResponseRedirect("/thank-you")
+
+# return render(request, "feedbacks/review.html", {
+#     "has_error": False
+# })
 
 
 # class SingleReviewView(TemplateView):
