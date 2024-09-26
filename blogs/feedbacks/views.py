@@ -3,6 +3,7 @@ from django.shortcuts import render
 
 from .forms import ReviewForm
 from .models import Review
+from django.views import View
 
 # Create your views here.
 
@@ -34,6 +35,31 @@ from .models import Review
 #     "has_error": False
 # })
 
+class ReviewView(View):
+    def get(self, request):
+        form = ReviewForm()
+
+        return render(request, "feedbacks/review.html", {
+            "form": form
+        })
+
+    def post(self, request):
+        form = ReviewForm(request.POST)
+
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect("/reviews/thank-you")
+
+        return render(request, "feedbacks/review.html", {
+            "form": form
+        })
+
+
+def thank_you(request):
+    return render(request, "feedbacks/thank_you.html")
+
+
+"""
 def review(request):
     if request.method == 'POST':
         form = ReviewForm(request.POST)
@@ -60,9 +86,9 @@ def review(request):
     #     form = ReviewForm(request.POST)
 
     #     if form.is_valid():
-    #         """
+    #         
     #         valid input & is required & cleans & validated data
-    #         """
+    #        
     #         print(form.cleaned_data)
     #         return HttpResponseRedirect("/reviews/thank-you")
 
@@ -71,7 +97,4 @@ def review(request):
     # return render(request, "feedbacks/review.html", {
     #     "form": form
     # })
-
-
-def thank_you(request):
-    return render(request, "feedbacks/thank_you.html")
+"""
