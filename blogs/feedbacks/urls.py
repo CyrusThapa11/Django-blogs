@@ -6,6 +6,7 @@ urlpatterns = [
     # path("thank-you", views.thank_you)
     path("all", views.ReviewsListView.as_view(), name="review-list"),
     path("thank-you", views.ThankYouView.as_view()),
+    path("favorite", views.AddFavoriteView.as_view()),
     # DYNAMIC PATH SEGMENT !
     path("<int:pk>", views.SingleReviewView.as_view())
 ]

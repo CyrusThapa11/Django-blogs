@@ -20,6 +20,13 @@ class ReviewView(CreateView):
     success_url = "/reviews/thank-you"
 
 
+class AddFavoriteView(View):
+    def post(self, request):
+        review_id = request.POST["review_id"]
+        request.session["favorite_review"] = review_id
+        return HttpResponseRedirect("/reviews/" + review_id)
+
+
 """
 class ReviewView(FormView):
     form_class = ReviewForm
@@ -94,6 +101,14 @@ class SingleReviewView(DetailView):
     template_name = "feedbacks/single_review.html"
     model = Review
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        loaded_review = self.object
+        request = self.request
+        favorite_id = request.session.get("favorite_review")
+        context["is_favorite"] = favorite_id == str(loaded_review.id)
+        return context
+
 
 # Create your views here.
 
@@ -138,7 +153,6 @@ class SingleReviewView(DetailView):
 
 # def thank_you(request):
 #     return render(request, "feedbacks/thank_you.html")
-
 
 """
 def review(request):
