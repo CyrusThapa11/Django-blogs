@@ -6,8 +6,41 @@ from datetime import date
 # from django.views import View
 
 from .models import Post
+from .forms import CommentForm
 # from .forms import CommentForm
 # Create your views here.
+from django.views.generic import ListView, DetailView
+
+
+class StartingPageView(ListView):
+    template_name = "personal_blogs/index.html"
+    model = Post
+    ordering = ["-date"]
+    context_object_name = "posts"
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        data = queryset[:3]
+        return data
+
+
+class AllPostsView(ListView):
+    template_name = "personal_blogs/all-posts.html"
+    model = Post
+    ordering = ["-date"]
+    context_object_name = "all_posts"
+
+
+class SinglePostView(DetailView):
+    template_name = "personal_blogs/post-detail.html"
+    model = Post
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["post_tags"] = self.object.tags.all()
+        context["comment_form"] = CommentForm()
+        return context
+
 
 """
 
@@ -35,35 +68,35 @@ class AllPostView(ListView):
 """
 
 
-def get_date(post):
-    return post['date']
+# def get_date(post):
+#     return post['date']
 
 
-def starting_page(request):
-    latest_posts = Post.objects.all().order_by("-date")[:3]
-    return render(request, "personal_blogs/index.html", {
-        "posts": latest_posts
-    })
+# def starting_page(request):
+#     latest_posts = Post.objects.all().order_by("-date")[:3]
+#     return render(request, "personal_blogs/index.html", {
+#         "posts": latest_posts
+#     })
 
-    # sorted_posts = sorted(all_posts, key=get_date )
-    # latest_posts = sorted_posts[-3:]
-    # return render(request, "personal_blogs/index.html", {
-    #     "posts": latest_posts
-    # })
+# sorted_posts = sorted(all_posts, key=get_date )
+# latest_posts = sorted_posts[-3:]
+# return render(request, "personal_blogs/index.html", {
+#     "posts": latest_posts
+# })
 
-    # return render(request, 'personal_blogs/index.html')
-    # return HttpResponse("here")
-    # latest_posts = Post.objects.all().order_by("-date")[:2]
-    # return render(request, "blog/index.html", {
-    #     "posts": latest_posts
-    # })
+# return render(request, 'personal_blogs/index.html')
+# return HttpResponse("here")
+# latest_posts = Post.objects.all().order_by("-date")[:2]
+# return render(request, "blog/index.html", {
+#     "posts": latest_posts
+# })
 
 
-def posts(request):
-    all_posts = Post.objects.all().order_by("-date")
-    return render(request, "personal_blogs/all-posts.html", {
-        "all_posts": all_posts
-    })
+# def posts(request):
+#     all_posts = Post.objects.all().order_by("-date")
+#     return render(request, "personal_blogs/all-posts.html", {
+#         "all_posts": all_posts
+#     })
 
 
 # def posts(request):
@@ -71,7 +104,7 @@ def posts(request):
 #     return render(request, "personal_blogs/index.html", {
 #         "posts": all_posts
 #     })
-    # return render(request, "personal_blogs/all-posts.html")
+# return render(request, "personal_blogs/all-posts.html")
 #   all_posts=Post.objects.all().order_by("-date")
 #   return render(request,"blog/all-posts.html",{
 #     "all_posts":all_posts
@@ -92,14 +125,14 @@ def posts(request):
 #         "post": identified_post
 #     })
 
-def post_detail(request, slug):
-    identified_post = get_object_or_404(Post, slug=slug)
-    # NOTE : the tag
-    # s propery is not an object of details it is simply an id to refer to from the database !
-    return render(request, "personal_blogs/post-detail.html", {
-        "post": identified_post,
-        "post_tags": identified_post.tags.all()
-    })
+# def post_detail(request, slug):
+#     identified_post = get_object_or_404(Post, slug=slug)
+#     # NOTE : the tag
+#     # s propery is not an object of details it is simply an id to refer to from the database !
+#     return render(request, "personal_blogs/post-detail.html", {
+#         "post": identified_post,
+#         "post_tags": identified_post.tags.all()
+#     })
 
 
 """
