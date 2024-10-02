@@ -4,12 +4,13 @@ from datetime import date
 # from django.urls import reverse
 # from django.views.generic import ListView, DetailView
 # from django.views import View
-
+from django.urls import reverse
 from .models import Post
 from .forms import CommentForm
 # from .forms import CommentForm
 # Create your views here.
 from django.views.generic import ListView, DetailView
+from django.views import View
 
 
 class StartingPageView(ListView):
@@ -31,15 +32,44 @@ class AllPostsView(ListView):
     context_object_name = "all_posts"
 
 
-class SinglePostView(DetailView):
-    template_name = "personal_blogs/post-detail.html"
-    model = Post
+# class SinglePostView(DetailView):
+#     template_name = "personal_blogs/post-detail.html"
+#     model = Post
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context["post_tags"] = self.object.tags.all()
-        context["comment_form"] = CommentForm()
-        return context
+#     def get_context_data(self, **kwargs):
+#         context = super().get_context_data(**kwargs)
+#         context["post_tags"] = self.object.tags.all()
+#         context["comment_form"] = CommentForm()
+#         return context
+
+
+class SinglePostView(View):
+    def get(self, request, slug):
+        post = Post.objects.get(slug=slug)
+        context = {
+            "post": post,
+            "post_tags": post.tags.all(),
+            "comment_form": CommentForm()
+        }
+        return render(request, "personal_blogs/post-detail.html", context)
+
+    def post(self, request, slug):
+        comment_form = CommentForm(request.POST)
+        post = Post.objects.get(slug=slug)
+
+        if comment_form.is_valid():
+            comment = comment_form.save(commit=False)
+            comment.post = post
+            comment.save()
+
+            return HttpResponseRedirect(reverse("post-detail", args=[slug]))
+
+        context = {
+            "post": post,
+            "post_tags": post.tags.all(),
+            "comment_form": comment_form
+        }
+        return render(request, "personal_blogs/post-detail.html", context)
 
 
 """
