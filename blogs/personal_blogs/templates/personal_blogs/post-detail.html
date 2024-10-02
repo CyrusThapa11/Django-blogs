@@ -145,6 +145,21 @@
       <span class="tag">{{ tag.caption }}</span>
     {% endfor %}
   </div>
+  
+  <div id="read-later">
+    <form action="{% url "read-later" %}" method="POST">
+      {% csrf_token %}
+      <input type="hidden" value="{{ post.id }}" name="post_id">
+      <button>
+        {% if saved_for_later %}
+          Remove from "Read Later" List
+        {% else %}
+          Read Later
+        {% endif %}
+      </button>
+    </form>
+  </div>
+
   <article>
     <img src="{{ post.image.url }}">
     {% comment %} <img src="{% static "personal_blogs/images/"|add:post.image_name %}" alt="{{ post.title }}" /> {% endcomment %}
@@ -156,6 +171,17 @@
 <main>
   {{ post.content|linebreaks }}
 </main>
+
+<section id="comments">
+  <ul>
+    {% for comment in comments %}
+      <li>
+        <h2>{{ comment.user_name }}</h2>
+        <p>{{ comment.text|linebreaks }}</p>
+      </li>
+    {% endfor %}
+  </ul>
+</section>
 
 <section id="comment-form">
   <h2>Your Comment</h2>
